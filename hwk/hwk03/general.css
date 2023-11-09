@@ -1,0 +1,167 @@
+  body{
+      background-color: #001A45;
+      margin: 0; /* Add this to remove the default margin */
+  padding: 0;
+  }
+  
+  h1{
+    font-size: 7vh;
+    color: white;
+    text-align: center;
+    font-family: 'Merriweather', serif;
+    transition: all 0.3s;
+    }
+
+  button{
+    background-color: #452b00;
+    color: white;
+    padding: 2.5vh;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition: all 0.2s;
+    border: 2px solid transparent; /* Set a transparent border by default */
+    font-family: 'Merriweather', serif;
+  
+    
+  }
+  
+  button:hover{
+    background-color: transparent;
+    border: 2px solid #452b00; /* Change border color on hover */
+    color: white;
+    padding: 2.5vh;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;  
+    cursor: pointer;
+      font-family: 'Merriweather', serif;
+  
+  }
+   
+  ul{
+      color: white;
+     font-family: 'Merriweather', serif;
+      text-align: start;
+  
+  }
+p2{
+  color: white;
+  font-family: 'Merriweather', serif;
+   text-align: start;
+   padding: 5vh;
+}
+  
+  .header{
+    align-items: center;
+    text-align: center;
+    justify-content:center;
+    background: #452b00;
+    padding:1vh;
+    margin: 0;
+  }
+  
+  a{
+    text-decoration:none;
+  }
+
+  h1:hover{
+    transform: scale(1.1);
+    transform-origin: center;
+    color:rgb(157, 157, 157);
+  }
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center horizontally in row layout */
+    align-items: center; /* Center vertically in row layout */
+  }
+
+  .box1, .box2 {
+    padding: 20px;
+    box-sizing: border-box;
+    
+  }
+
+  .box1 {
+    width: 50%; /* Initially, two boxes side by side */
+    text-align: start;
+    border: 1px solid #ccc;
+  }
+
+  .box2 {
+   width: 50%;
+  }
+
+  .box1 img {
+    max-width: 50%; /* Make sure the image doesn't exceed its container width */
+    height: auto;
+      display: block; /* Remove any extra spacing that may affect centering */
+      margin: 0 auto;
+  }
+
+  .box2 img {
+    max-width: 100%; /* Make the larger image responsive to the container width */
+    height: auto;
+    padding: 0;
+  }
+
+  .ingredients {
+    font-weight: bold;
+    color: white;
+    font-family: 'Merriweather', serif;
+
+  }
+
+  .ingredients-list {
+    list-style-type: disc; /* Use bullet points for the list */
+    padding-left: 20px;
+  }
+
+  @media (max-width: 500px) {
+    .box1, .box2 {
+      width: 100%;
+    }
+  }
+
+  .instructions {
+    display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns on larger screens */
+  gap: 20px; /* Add some spacing between items */
+  color: white;
+  font-family: 'Merriweather', serif;
+  justify-content: center;
+  }
+
+  @media (max-width: 500px) {
+    .instructions {
+      grid-template-columns: repeat(1, 1fr); /* 1 column on the smallest screens */
+    }
+  }
+
+  .instruction-item {
+    flex: 1;
+    margin: 10px; /* Add spacing between items */
+    border: 1px solid #ccc;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  .instruction-item img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .instruction-item figcaption {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  @media (max-width: 500px) {
+    .instruction-item {
+      max-width: calc(100% - 20px); /* One item per row on the smallest screens */
+    }
+  }
