@@ -51,9 +51,11 @@
   </ul>
   <br>
    </header>
+ 
 
 
   <div id="content">
+    <div class="food">
     <?php
       // // echo "Holla";
       // $rNum = rand(1, 15);
@@ -81,22 +83,31 @@
         while ($oneRecipe = mysqli_fetch_array($results)) {
           // echo '<h3>' .$oneRecipe['Title']. ' - '  . $oneRecipe['Cal/Serving']  .  '</h3>'; 
           $id = $oneRecipe['id'];
-          if ($id % 2 == 0) {
-            echo '<figure class="oneRec">';
-          } else {
-            echo '<figure class="oneRecOdd">';
-          }
+          echo '<a href="/detail-page/index.php?id='. $oneRecipe['id'] .'">';
+          echo '<div class="thumbnail">'; 
           echo '<img src="./images/' . $oneRecipe['Main IMG'] . '" alt="Dish Image">';
-          echo '<figcaption>' . $id . ' ' . $oneRecipe['Title'] . '</figcaption>';
-          echo '</figure>';
+          echo '<h1>' . $oneRecipe['Title'] . '</h1>';
+          echo '<h2>'  . $oneRecipe['Subtitle'] . '</h2>';
+          echo '</div>';
+          echo '</a>';
         }
 
       } else {
         consoleMsg("QUERY ERROR");
       }
     ?>
+<!-- <div class="food">
+<a>
+<div class="thumbnail">
+  <img src="images/0101_2PF_Shrimp-Fra-Diavolo_97454_SQ_hi_res.jpg">
+<h1>shimp</h1>
+<h2>placeholder</h2>
+</div>
+</a>
+</div> -->
 
-
+  
+</div>
   </div>
 `
 </body>

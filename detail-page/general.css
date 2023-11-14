@@ -23,8 +23,6 @@
     transition: all 0.2s;
     border: 2px solid transparent; /* Set a transparent border by default */
     font-family: 'Merriweather', serif;
-  
-    
   }
   
   button:hover{
@@ -47,13 +45,7 @@
       text-align: start;
   
   }
-p2{
-  color: white;
-  font-family: 'Merriweather', serif;
-   text-align: start;
-   padding: 5vh;
-}
-  
+ 
   .header{
     align-items: center;
     text-align: center;
@@ -160,8 +152,23 @@ p2{
     margin-top: 10px;
   }
 
+  p1{
+    color: white;
+    font-family: 'Merriweather', serif;
+     text-align: start;
+     padding: 5vh;
+  }
+
+  p2{
+    color: white;
+    font-family: 'Merriweather', serif;
+     text-align: start;
+     padding: 3vh;
+  }
+
   @media (max-width: 500px) {
     .instruction-item {
       max-width: calc(100% - 20px); /* One item per row on the smallest screens */
     }
   }
+

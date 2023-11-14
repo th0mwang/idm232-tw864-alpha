@@ -8,8 +8,13 @@ header{
   margin-right: -1vh;
 }
 
+html{
+width:100%;
+
+}
 body{
     background-color: #001A45;
+    width:100%;
 }
 
 figcaption {
@@ -82,19 +87,7 @@ button:hover{
 
 }
 
-.grid-item{
-  border: 0.5vh solid transparent;
-  transition: all 0.2s;
-  margin: 0;
-  padding-bottom: 0%;
-}
 
-.grid-item:hover{
- border: 0.5vh solid white;
- margin: 0;
- padding-bottom: 0%;
-
-}
 
 hr{
   border: 1px solid #452b00;
@@ -147,4 +140,48 @@ p2{
   cursor: pointer;
     font-family: 'Merriweather', serif;
 
+}
+
+.thumbnail{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  width:100%;
+  margin:0%;
+}
+
+.food{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  /* align-content: center; */
+  width:100%;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap:2%;
+}
+
+h1{
+  font-size: 4vh;
+  color: white;
+  font-family: 'Merriweather', serif;
+}
+
+h2{
+  font-size: 2vh;
+  color: white;
+  font-family: 'Merriweather', serif;
+
+}
+
+.thumbnail img{
+  width:100%;
+}
+
+a{
+  width:40%;
 }

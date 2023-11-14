@@ -11,6 +11,20 @@
   
     
   <body>
+  <?php
+  // $msg = "HOWDY";
+  // echo '<script type="text/javascript">console.log("'. $msg .'");</script>';
+
+  require_once '../includes/fun.php';
+  consoleMsg("PHP to JS .. is Wicked FUN");
+
+  // Include env.php that holds global vars with secret info
+  require_once '../env.php';
+
+  // Include the database connection code
+  require_once '../includes/database.php';
+
+?>
     <div class="header">
       <div>
         <a href="/week03-start/hwk/hwk02/index.html" >
@@ -21,12 +35,64 @@
     <br>
     <div class="container">
       <div class="box1">
-        <img src="/week03-start/hwk/hwk03/images/orange chicken/orangechickening.webp" alt="Image 1">
+        <?php
+         try {
+          // Establish a new PDO connection
+          $pdo = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
+          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      
+          // Check if 'id' is set in the URL
+          if (isset($_GET['id'])) {
+              $requestedId = $_GET['id'];
+      
+              // Prepare a query to fetch all items associated with the specified ID
+              $stmt = $pdo->prepare('SELECT * FROM recipes WHERE id = :requestedId');
+              $stmt->bindParam(':requestedId', $requestedId, PDO::PARAM_INT);
+              $stmt->execute();
+      
+              // Fetch all rows as an associative array
+              $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      
+              // Display the items
+              // foreach ($items as $item) {
+              //     echo 'Item Name: ' . $item['Title'] . '<br>';
+              //     echo 'Item Description: ' . $item['Description'] . '<br>';
+              //     // Add more fields as needed
+              //     echo '<hr>';
+              // }
+      
+              // If no items are found, display a message
+              if (empty($items)) {
+                  echo 'No items found for the specified ID.';
+              }
+          } else {
+              echo 'No ID specified in the URL.';
+          }
+      } catch (PDOException $e) {
+          die('Database connection failed: ' . $e->getMessage());
+      } finally {
+          // Close the database connection
+          $pdo = null;
+      };
+    foreach ($items as $item) {
+      echo '<img src="../images/ingredients/' . $item['Ingredients IMG'] . '" alt="Image 1">';
+    };
+        ?>
+        <!-- <img src="/images/orange chicken/orangechickening.webp" alt="Image 1"> -->
+        
         <div class="ingredients">
           Ingredients:<br><br>
         </div>
        <ul>
-        <li>
+        <?php
+        $bigstringingre = $item['All Ingredients'];
+        $bigstringingreexplo = explode("*", $bigstringingre);
+
+        foreach ($bigstringingreexplo as $ingreItems) {
+          echo '<li>' . $ingreItems . '</li>' ;
+        };
+        ?>
+        <!-- <li>
           4 Boneless, Skinless Chicken Breasts
         </li>
         <li>
@@ -55,50 +121,61 @@
          </li>
          <li>
           1 Bunch Kale
-         </li>
+         </li> -->
        </ul>
       
       </div>
       <div class="box2">
-        <img src="/week03-start/hwk/hwk03/images/Ancho-Orange Chicken (1).jpg" alt="Larger Image">
+        <?php
+            foreach ($items as $item) {
+              echo '<img src="../images/' . $item['Main IMG'] . '" alt="Image 1">';
+            };
+        ?>
+        <!-- <img src="/images/Ancho-Orange Chicken (1).jpg" alt="Larger Image"> -->
+        <?php
+               echo '<p1>' . $item['Title'] . '</p1>';
+               echo '<p2>' . $item['Subtitle'] . '</p2>';
+        ?>
+        <!-- <p1>hand</p1> -->
+        <!-- <p2>burger</p2> -->
       </div>
     </div> 
     <br><br>
       <div class="instructions">
         <div class="instruction-item">
-          <img src="/week03-start/hwk/hwk03/images/orange chicken/step 1.webp" alt="Step 1">
+          <img src="/images/orange chicken/step 1.webp" alt="Step 1">
           <figcaption>Step 1:</figcaption>
           <p>Place an oven rack in the center of the oven, then preheat to 450°F. In a medium pot, combine the <strong>rice, a big pinch of salt,</strong> and <strong>1 1/2 cups of water.</strong> Heat to boiling on high. Once boiling, cover and reduce the heat to low. Cook 12 to 14 minutes, or until the water has been absorbed and the rice is tender. Turn off the heat and fluff with a fork. Cover to keep warm.
           </p>
         </div>
         <div class="instruction-item">
-          <img src="/week03-start/hwk/hwk03/images/orange chicken/step 2.webp" alt="Step 2">
+          <img src="/images/orange chicken/step 2.webp" alt="Step 2">
           <figcaption>2 Prepare the ingredients & make the glaze:
           </figcaption>
           <p>While the rice cooks, wash and dry the fresh produce. Peel the <strong>carrots;</strong> quarter lengthwise, then halve crosswise. Peel and roughly chop the <strong>garlic.</strong> Remove and discard the stems of the <strong>kale;</strong> finely chop the leaves. Using a peeler, remove the <strong>lime</strong> rind, avoiding the white pith; mince to get 2 teaspoons of zest (or use a zester). Halve the lime crosswise. Halve the <strong>orange;</strong> squeeze the juice into a bowl, straining out any seeds. Whisk in the <strong>chile paste</strong> and <strong>2 tablespoons of water</strong> until smooth.
             .</p>
         </div>
         <div class="instruction-item">
-          <img src="/week03-start/hwk/hwk03/images/orange chicken/step 3.webp" alt="Step 3">
+          <img src="/images/orange chicken/step 3.webp" alt="Step 3">
           <figcaption>Step 3:</figcaption>
           <p>Place the <strong>sliced carrots</strong> on a sheet pan. Drizzle with olive oil and season with salt and pepper; toss to coat. Arrange in an even layer. Roast 15 to 17 minutes, or until tender when pierced with a fork. Remove from the oven.
           </p>
         </div>
         <div class="instruction-item">
-          <img src="/week03-start/hwk/hwk03/images/orange chicken/step 4.webp" alt="Step 4">
+          <img src="/images/orange chicken/step 4.webp" alt="Step 4">
           <figcaption>Step 4:</figcaption>
           <p>While the carrots roast, in a large pan (nonstick, if you have one), heat 2 teaspoons of olive oil on medium-high until hot. Add the <strong>chopped garlic</strong> and cook, stirring constantly, 30 seconds to 1 minute, or until fragrant. Add the <strong>chopped kale;</strong> season with salt and pepper. Cook, stirring occasionally, 3 to 4 minutes, or until slightly wilted. Add <strong>1/3 cup of water;</strong> season with salt and pepper. Cook, stirring occasionally, 3 to 4 minutes, or until the kale has wilted and the water has cooked off. Transfer to the pot of <strong>cooked rice.</strong> Stir to combine; season with salt and pepper to taste. Cover to keep warm. Wipe out the pan.
           </p>
         </div>
         <div class="instruction-item">
-          <img src="/week03-start/hwk/hwk03/images/orange chicken/step 5.webp" alt="Step 5">
+          <img src="/images/orange chicken/step 5.webp" alt="Step 5">
           <figcaption>5 Cook & glaze the chicken:
           </figcaption>
           <p>While the carrots continue to roast, pat the <strong>chicken</strong> dry with paper towels; season with salt and pepper on both sides. In the same pan, heat 2 teaspoons of olive oil on medium-high until hot. Add the seasoned chicken and cook 4 to 6 minutes on the first side, or until browned. Flip and cook 2 to 3 minutes, or until lightly browned. Add the <strong>glaze</strong> and cook, frequently spooning the glaze over the chicken, 2 to 3 minutes, or until the chicken is coated and cooked through. Turn off the heat; stir the <strong>butter</strong> and <strong>the juice of 1 lime half</strong> into the glaze until the butter has melted. Season with salt and pepper to taste.
           </p>
         </div>
         <div class="instruction-item">
-          <img src="/week03-start/hwk/hwk03/images/orange chicken/step 6.webp" alt="Step 6">
+          <img src="/images/orange chicken/step 6.webp" alt="Step 6">
           <figcaption>6 Finish the rice & serve your dish:
           </figcaption>
           <p>To the pot of <strong>cooked rice and kale,</strong> add the <strong>lime zest, crème fraîche, raisins,</strong> and <strong>the juice of the remaining lime half.</strong> Stir to combine; season with salt and pepper to taste. Serve the <strong>glazed chicken</strong> with the finished rice and <strong>roasted carrots.</strong> Top the chicken with the remaining glaze from the pan. Enjoy!
