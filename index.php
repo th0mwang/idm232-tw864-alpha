@@ -3,7 +3,6 @@
 <html>
 
 <head>
-  <title>PHP Main Menu Dynamic</title>
   <link rel="stylesheet" href="./styles/general.css">
   <title>Fork in the Road</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
