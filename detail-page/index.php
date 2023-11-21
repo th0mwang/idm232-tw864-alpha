@@ -36,14 +36,14 @@
     <div class="container">
       <div class="box1">
         <?php
-         try {
+  
           // Establish a new PDO connection
           $pdo = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
           $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       
           // Check if 'id' is set in the URL
-          if (isset($_GET['id'])) {
-              $requestedId = $_GET['id'];
+          // if (isset($_GET['id'])) {
+              $requestedId = 2;
       
               // Prepare a query to fetch all items associated with the specified ID
               $stmt = $pdo->prepare('SELECT * FROM recipes WHERE id = :requestedId');
@@ -62,18 +62,18 @@
               // }
       
               // If no items are found, display a message
-              if (empty($items)) {
-                  echo 'No items found for the specified ID.';
-              }
-          } else {
-              echo 'No ID specified in the URL.';
-          }
-      } catch (PDOException $e) {
-          die('Database connection failed: ' . $e->getMessage());
-      } finally {
+              // if (empty($items)) {
+              //     echo 'No items found for the specified ID.';
+              // }
+          // } else {
+          //     echo 'No ID specified in the URL.';
+          // }
+      // } catch (PDOException $e) {
+      //     die('Database connection failed: ' . $e->getMessage());
+      // } finally {
           // Close the database connection
-          $pdo = null;
-      };
+      //     $pdo = null;
+      // };
     foreach ($items as $item) {
       echo '<img src="../images/ingredients/' . $item['Ingredients IMG'] . '" alt="Image 1">';
     };
@@ -143,26 +143,29 @@
      <br><br>
      <?php
            // Get all the recipes from "recipes" table in the "idm232" database
-      $query = "SELECT * FROM recipes";
+      $query = "SELECT * FROM recipes WHERE id = $requestedId";
       $results = mysqli_query($db_connection, $query);
-      if ($results->num_rows > 0) {
+     
+      // echo '<p>' . $stepByStepImgs . '</p>';
+      // if ($results->num_rows > 0) {
         consoleMsg("Query successful! number of rows: $results->num_rows");
         while ($oneRecipe = mysqli_fetch_array($results)) {
+          $stepByStepImgs = explode("*", $oneRecipe['Step IMGs']);
+          $stepByStepText = explode("*", $oneRecipe['All Steps']);
           // echo '<h3>' .$oneRecipe['Title']. ' - '  . $oneRecipe['Cal/Serving']  .  '</h3>'; 
           $id = $oneRecipe['id'];
-          if ($id % 2 == 0) {
+          for($lp = 0; $lp < count($stepByStepText); $lp++) {
+            $firstChar = substr($stepByStepText[$lp], 0, 1);
+            if (is_numeric($firstChar)) {
             echo '<figure class="oneRec">';
-          } else {
-            echo '<figure class="oneRecOdd">';
-          }
-          echo '<img src="./images/' . $oneRecipe['Main IMG'] . '" alt="Dish Image">';
-          echo '<figcaption>' . $id . ' ' . $oneRecipe['Title'] . '</figcaption>';
-          echo '</figure>';
-        }
-
-      } else {
-        consoleMsg("QUERY ERROR");
-      }
+            echo '<p1>' . $stepByStepText[$lp] . '</p1>';
+            echo '<img src="./images/steps/' . $stepByStepImgs[$firstChar-1] . '" alt="Dish Image">';
+            echo '<figcaption>' . $stepByStepText[$lp+1] . '</figcaption>';
+            echo '</figure>';
+          } } }
+      // } else {
+      //   consoleMsg("QUERY ERROR");
+      // } 
       ?>
      <!--
       <div class="instructions">
