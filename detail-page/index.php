@@ -140,7 +140,31 @@
         <!-- <p2>burger</p2> -->
       </div>
     </div> 
-    <br><br>
+     <br><br>
+     <?php
+           // Get all the recipes from "recipes" table in the "idm232" database
+      $query = "SELECT * FROM recipes";
+      $results = mysqli_query($db_connection, $query);
+      if ($results->num_rows > 0) {
+        consoleMsg("Query successful! number of rows: $results->num_rows");
+        while ($oneRecipe = mysqli_fetch_array($results)) {
+          // echo '<h3>' .$oneRecipe['Title']. ' - '  . $oneRecipe['Cal/Serving']  .  '</h3>'; 
+          $id = $oneRecipe['id'];
+          if ($id % 2 == 0) {
+            echo '<figure class="oneRec">';
+          } else {
+            echo '<figure class="oneRecOdd">';
+          }
+          echo '<img src="./images/' . $oneRecipe['Main IMG'] . '" alt="Dish Image">';
+          echo '<figcaption>' . $id . ' ' . $oneRecipe['Title'] . '</figcaption>';
+          echo '</figure>';
+        }
+
+      } else {
+        consoleMsg("QUERY ERROR");
+      }
+      ?>
+     <!--
       <div class="instructions">
         <div class="instruction-item">
           <img src="/images/orange chicken/step 1.webp" alt="Step 1">
@@ -182,6 +206,7 @@
           </p>
         </div>
       </div>
+      -->
   </body>
   <div id="content">
   
