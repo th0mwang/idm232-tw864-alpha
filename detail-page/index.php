@@ -80,7 +80,7 @@
         ?>
         <!-- <img src="/images/orange chicken/orangechickening.webp" alt="Image 1"> -->
         
-        <div class="ingredients">
+        <di v class="ingredients">
           Ingredients:<br><br>
         </div>
        <ul>
