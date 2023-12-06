@@ -75,7 +75,7 @@
       //     $pdo = null;
       // };
     foreach ($items as $item) {
-      echo '<img src="../images/ingredients/' . $item['Ingredients IMG'] . '" alt="Image 1">';
+      echo '<img src="../ images/ingredients/' . $item['Ingredients IMG'] . '" alt="Image 1">';
     };
         ?>
         <!-- <img src="/images/orange chicken/orangechickening.webp" alt="Image 1"> -->
@@ -143,7 +143,12 @@
      <br><br>
      <?php
            // Get all the recipes from "recipes" table in the "idm232" database
-      $query = "SELECT * FROM recipes WHERE id = $requestedId";
+
+
+      $recID = $_GET('recID');
+      $query = "SELECT * FROM recipes WHERE id = {$recID}";
+
+
       $results = mysqli_query($db_connection, $query);
      
       // echo '<p>' . $stepByStepImgs . '</p>';

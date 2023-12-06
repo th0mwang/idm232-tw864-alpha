@@ -74,6 +74,50 @@
       // }
     ?>
 
+
+
+<?php
+      // Get all the recipes from "recipes" table in the "idm232" database
+      $search = $_POST['search'];
+    consoleMsg("Search string is: $search");
+
+    $filter = $_GET['filter'];
+    consoleMsg("Filter string is: $filter");
+    $cook = $_GET['cook'];
+
+    // $filterChicken = $_POST['chicken'];
+    // consoleMsg("Chicken filter string is $filterChicken");
+
+    if (!empty($search)) {
+        $query = "SELECT * FROM Recipes WHERE Title LIKE '%{$search}%' OR Subtitle LIKE '%{$search}%' ";
+      } elseif (!empty($filter)) { 
+        $query = "SELECT * FROM Recipes WHERE Proteine LIKE '%{$filter}%'"; 
+    }  elseif (!empty($cook)) { 
+        $query = "SELECT * FROM Recipes WHERE `Cook Time` IN ('30min', '20min', '25min')";
+    } else {
+        $query = "SELECT * FROM Recipes";
+      };
+      
+      
+    //   $query = "SELECT * FROM recipes";
+      $results = mysqli_query($db_connection, $query);
+      if ($results->num_rows > 0) {
+        consoleMsg("Query successful! number of rows: $results->num_rows");
+        while ($oneRecipe = mysqli_fetch_array($results)) {
+          // echo '<h3>' .$oneRecipe['Title']. ' - '  . $oneRecipe['Cal/Serving']  .  '</h3>'; 
+          $id = $oneRecipe['id'];
+          echo '<a href="./recepie.php?id='. $oneRecipe['id'] .'" class= "recepie">';
+          echo '<img src="./images/' . $oneRecipe['Main IMG'] . '" alt="Dish Image">';
+          echo '<figcaption>'  . $oneRecipe['Title'] . ' ' . $oneRecipe['Subtitle'] .  '</figcaption>';
+          echo '</a>';
+        }
+
+      } else {
+        consoleMsg("QUERY ERROR");
+      }
+
+
+
     <?php
       // Get all the recipes from "recipes" table in the "idm232" database
       $query = "SELECT * FROM recipes";
